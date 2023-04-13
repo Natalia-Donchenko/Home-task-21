@@ -55,9 +55,9 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Users />}>
-         <Route path='/albums' element={<Albums />}>
+         {/* <Route path='/albums' element={<Albums />}>
           <Route path='/photos' element={<Photos />} />
-         </Route>
+         </Route> */}
         </Route>
       </Routes>
 
