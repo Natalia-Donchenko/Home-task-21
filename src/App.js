@@ -30,25 +30,29 @@ function Users () {
 }
 
 function Albums () {
-  const [albums, setAlbums] = useState({})
+  const [albums, setAlbums] = useState([])
+  const [album, setAlbum] = useState({})
    const query = new URLSearchParams(useLocation().search)
    const id = query.get('id')
    console.log(id)
+   console.log(album)
+   console.log(albums)
 
    useEffect(() => {
     async function fetchData() {
       const response = await fetch(`https://jsonplaceholder.typicode.com/albums/${id}`);
       const jsonData = await response.json();
-      setAlbums(jsonData);
+      setAlbum(jsonData);
     }
     fetchData();
   }, []);
 
   
+  
   return (
   <div>
-      <div>{albums.title}</div>
-      <Link to={`/photos?id=${albums.id}`}>
+      <div>{album.title}</div>
+      <Link to={`/photos?id=${album.id}`}>
         <button>Photos</button>
     </Link>
  
