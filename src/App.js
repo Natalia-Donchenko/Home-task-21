@@ -1,13 +1,10 @@
 import React from 'react';
-import { Routes, Route, Link, Outlet, useParams, useSearchParams} from 'react-router-dom';
+import { Routes, Route, Link, Outlet, useParams, useSearchParams, useLocation} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 function Users () {
   const [users, setUsers] = useState([])
-  const [searchParams] = useSearchParams()
-
-
-  useEffect(() => {
+    useEffect(() => {
     async function fetchData() {
       const response = await fetch('https://jsonplaceholder.typicode.com/users');
       const jsonData = await response.json();
@@ -16,57 +13,80 @@ function Users () {
     fetchData();
   }, []);
 
-
   return (
     <div>
-      {
-        users.map(user => (
-          <Link 
-            key={user.id} 
-            to={`/users/${user.id}`}
-          >
-            <li>{user.name}</li>
+      {users.map(user => (
+        <div key={user.id}>
+          <div>{user.name}</div>
+          <Link to={`/album?id=${user.id}`}>
+            <button>Albums</button>
           </Link>
-        ))
-      }
+
+        </div>
+      ))}
     </div>
+    
   )
-  
 }
 
 function Albums () {
- 
-  return
-}
+  const [albums, setAlbums] = useState({})
+   const query = new URLSearchParams(useLocation().search)
+   const id = query.get('id')
+   console.log(id)
 
-function Photos() {
-  return 
-}
+   useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(`https://jsonplaceholder.typicode.com/albums/${id}`);
+      const jsonData = await response.json();
+      setAlbums(jsonData);
+    }
+    fetchData();
+  }, []);
 
-function App() {
-
- 
+  
   return (
-    <>
-      <div>
-        <Link to='/'>Users</Link>
-      </div>
+  <div>
+      <div>{albums.title}</div>
+      <Link to={`/photos?id=${albums.id}`}>
+        <button>Photos</button>
+    </Link>
+ 
+    </div>
 
-
-      <Routes>
-        <Route path='/' element={<Users />}>
-         {/* <Route path='/albums' element={<Albums />}>
-          <Route path='/photos' element={<Photos />} />
-         </Route> */}
-        </Route>
-      </Routes>
-
-      <Outlet />
-    </>
-   
-    
   )
-    
 }
+
+  function Photos () {
+    const [photos, setPhotos] = useState({})
+     const query = new URLSearchParams(useLocation().search)
+     const id = query.get('id')
+     console.log(id)
+  
+     useEffect(() => {
+      async function fetchData() {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/photos/${id}`);
+        const jsonData = await response.json();
+        setPhotos(jsonData);
+      }
+      fetchData();
+    }, []);
+    return (
+     
+        <div>hi</div>
+    
+    )
+  }
+
+function App () {
+  return (
+    <Routes>
+      <Route path='/' element={<Users />}></Route>
+      <Route path='/album' element={<Albums />}></Route>
+      <Route path='/photo' element={<Photos />}></Route>
+    </Routes>
+  )
+}
+
 
 export default App;
