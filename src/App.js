@@ -13,79 +13,58 @@ function Users () {
     fetchData();
   }, []);
 
-  return (
-    <div>
-      {users.map(user => (
-        <div key={user.id}>
-          <div>{user.name}</div>
-          <Link to={`/album?id=${user.id}`}>
-            <button>Albums</button>
-          </Link>
 
-        </div>
+  console.log(users)
+
+  return (
+    <ul>
+      {users?.map(user => (
+        
+          <li key={user.id}>
+            <Link to={`/user?userId=${user.id}`}>{user.name}</Link>
+          </li>
+       
       ))}
-    </div>
+    </ul>
     
   )
 }
 
 function Albums () {
+  const [params] = useSearchParams()
+  const id = params.get('userId')
+  const [album, setAlbum] = useState(0)
   const [albums, setAlbums] = useState([])
-  const [album, setAlbum] = useState({})
-  const [searchParams, setSearchParams] = useSearchParams()
-   const id = searchParams.get('id')
 
-
-   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/albums/${id}`);
-      const jsonData = await response.json();
-      setAlbum(jsonData);
-    }
-    fetchData();
-  }, []);
-
-  
-  
-  return (
-  <div>
-      <div>{album.title}</div>
-      <Link to={`/photos?id=${album.id}`}>
-        <button>Photos</button>
-    </Link>
+  console.log(album)
+  console.log(id)
  
-    </div>
+
+  useEffect (() => {
+    fetch(`https://jsonplaceholder.typicode.com/albums/${id}`)
+      .then((res) => res.json())
+      .then(setAlbum)
+  }, [id])
+
+
+
+  return (
+    
+
+  <ul>
+      <li key={album.id}>{album?.title}</li>
+
+    </ul>
 
   )
 }
 
-  function Photos () {
-    const [photos, setPhotos] = useState({})
-     const query = new URLSearchParams(useLocation().search)
-     const id = query.get('id')
-     console.log(id)
-  
-     useEffect(() => {
-      async function fetchData() {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/photos/${id}`);
-        const jsonData = await response.json();
-        setPhotos(jsonData);
-      }
-      fetchData();
-    }, []);
-    return (
-     
-        <div>hi</div>
-    
-    )
-  }
 
 function App () {
   return (
     <Routes>
       <Route path='/' element={<Users />}></Route>
-      <Route path='/album' element={<Albums />}></Route>
-      <Route path='/photo' element={<Photos />}></Route>
+      <Route path='/user' element={<Albums />}></Route>
     </Routes>
   )
 }
