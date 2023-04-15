@@ -32,11 +32,9 @@ function Users () {
 function Albums () {
   const [albums, setAlbums] = useState([])
   const [album, setAlbum] = useState({})
-   const query = new URLSearchParams(useLocation().search)
-   const id = query.get('id')
-   console.log(id)
-   console.log(album)
-   console.log(albums)
+  const [searchParams, setSearchParams] = useSearchParams()
+   const id = searchParams.get('id')
+
 
    useEffect(() => {
     async function fetchData() {
