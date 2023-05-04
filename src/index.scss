@@ -1,0 +1,169 @@
+body {
+  margin:  0;
+  background-color: rgb(169, 175, 179);
+
+  .container {
+    display: flex;
+    justify-content: center;
+
+    a {
+      text-decoration: none;
+      transition: all 0.3s linear;
+
+      &:hover {
+        cursor: pointer;
+        
+      }
+    }
+
+    .home__showList {
+      display: flex;
+      margin-top: 50vh;
+      transform: translate(0, -50%);
+      padding:40px 50px;
+      background-color: rgba(60, 63, 65, 0.568);
+      border-radius: 100px;
+      text-decoration: none;
+      color: rgb(33, 180, 168);
+      text-transform: uppercase;
+      font-weight: bold;
+      border: 2px solid rgb(33, 180, 168);
+      transition: all 0.3s linear;
+      
+
+      &:hover {
+        color: rgba(253, 143, 143, 0.788);
+        border: 2px solid rgba(253, 143, 143, 0.788);
+      }
+
+    }
+
+    .users__list {
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 50vh;
+      transform: translate(0, -50%);
+
+      .users__list-item {
+        display: flex;
+        justify-content: center;
+        border: 2px solid rgb(33, 180, 168);
+        padding: 5px 15px;
+        min-width: max-content;
+        font-size: 24px;
+        border-radius: 20px;
+        background-color: rgb(60, 63, 65);
+        transition: all 0.3s linear;
+        
+        a {
+          color: rgb(33, 180, 168);
+
+          &:visited {
+          color: rgb(33, 180, 168);;
+          }
+
+          &:hover {
+          color: rgba(253, 143, 143, 0.788);
+         
+          }
+        }
+
+        &:hover {
+          cursor: pointer;
+          border: 2px solid rgba(253, 143, 143, 0.788);
+          color: rgba(253, 143, 143, 0.788);
+        }
+        
+      }
+    }
+
+    .albums__list {
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      margin: 0 100px;
+      margin-top: 50vh;
+      transform: translate(0, -50%);
+
+      .albums__list-item {
+        display: flex;
+        border: 2px solid rgb(33, 180, 168);
+        padding: 15px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-width: 130px;
+        min-height: 130px;
+        font-size: 24px;
+        border-radius: 20px;
+        background-color: rgb(60, 63, 65);
+        transition: all 0.3s linear;
+
+        a {
+          color: rgb(33, 180, 168);
+
+          &:visited {
+          color: rgb(33, 180, 168);;
+          }
+
+          &:hover {
+          color: rgba(253, 143, 143, 0.788);
+         
+          }
+        }
+
+        &:hover {
+          cursor: pointer;
+          border: 2px solid rgba(253, 143, 143, 0.788);
+          color: rgba(253, 143, 143, 0.788);
+        }
+
+      }
+
+      
+    }
+
+    .photos__list {
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      margin: 0 100px;
+      margin-top: 50px;
+     
+      &-item {
+        padding: 10px;
+        display: flex;
+        text-align: center;
+        max-width: 150px;
+        background-color: rgba(60, 63, 65, 0.568);
+        border-radius: 8px;
+
+        img {
+          border-radius: 8px;
+        }
+
+        &_title {
+          min-height: 70px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: rgba(8, 8, 8, 0.568);
+          transition: all 0.3s linear;
+
+          &:hover {
+            color: rgb(11, 187, 172);
+          }
+          
+        }
+      }
+    }
+    
+  }
+}
